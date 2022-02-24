@@ -17,8 +17,7 @@ namespace SP_CSOM_DEMO2
             CreateSPManagedMetaDataField("RFPLanguage", "RFP Language", "RFP Columns", "KPMGLanguages", "Indian");
             Console.ReadLine();
         }
-        private static void CreateSPManagedMetaDataField(string columnName, string displayName, string columnGroup, string TermGroup, string TermSet
-)
+        private static void CreateSPManagedMetaDataField(string columnName, string displayName, string columnGroup, string TermGroup, string TermSet)
         {
             InitiateAuthentication(context);
 

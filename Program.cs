@@ -77,7 +77,7 @@ namespace SP_CSOM_DEMO2
             }
             else
             {
-
+                Console.WriteLine($"Site Column {displayName} already exists.");
             }
         }
 

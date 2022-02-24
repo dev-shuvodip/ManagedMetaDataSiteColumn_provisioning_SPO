@@ -112,11 +112,9 @@ namespace SP_CSOM_DEMO2
 
         private static void InitiateAuthentication(ClientContext ctx)
         {
-
             ClientContext context = ctx;
             context.AuthenticationMode = ClientAuthenticationMode.Default;
             context.Credentials = new SharePointOnlineCredentials(GetSPOUserName(), GetSPOSecureStringPassword());
-
         }
     }
 }

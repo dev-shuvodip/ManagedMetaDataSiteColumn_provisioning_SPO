@@ -33,7 +33,6 @@ namespace SP_CSOM_DEMO2
                 if (columnName.ToLower() == field.InternalName.ToLower())
                 {
                     siteColumnExists = true;
-                    Console.WriteLine($"SiteColumn {field.InternalName.ToLower()} exixts: {siteColumnExists}");
                     break;
                 }
             }

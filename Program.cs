@@ -14,7 +14,7 @@ namespace SP_CSOM_DEMO2
         {
             InitiateAuthentication(context);
 
-            CreateSPManagedMetaDataField("RFPLanguage", "RFP Language", "RFP Columns", "KPMGLanguages", "Indian");
+            CreateSPManagedMetaDataField("MetaDataLanguage", "MetaData Language", "RFP Columns", "KPMGLanguages", "Indian");
             Console.ReadLine();
         }
         private static void CreateSPManagedMetaDataField(string columnName, string displayName, string columnGroup, string TermGroup, string TermSet)
@@ -49,30 +49,30 @@ namespace SP_CSOM_DEMO2
                 context.Load(set, s => s.Id);
                 context.ExecuteQuery();
 
-                Field siteTaxColumn = web.Fields.AddFieldAsXml(columnTaxonomySchema, false, AddFieldOptions.DefaultValue);
-                context.Load(siteTaxColumn);
+                Field siteTaxonomyColumn = web.Fields.AddFieldAsXml(columnTaxonomySchema, false, AddFieldOptions.DefaultValue);
+                context.Load(siteTaxonomyColumn);
                 context.ExecuteQuery();
-                Console.WriteLine($"Site Column {siteTaxColumn.Title} created.");
+                Console.WriteLine($"Site Column {siteTaxonomyColumn.Title} created.");
 
-                TaxonomyField siteTaxColumnBind = context.CastTo<TaxonomyField>(siteTaxColumn);
-                siteTaxColumnBind.SspId = store.Id;
-                siteTaxColumnBind.TermSetId = set.Id;
-                siteTaxColumnBind.Update();
+                TaxonomyField siteTaxonomyColumnBind = context.CastTo<TaxonomyField>(siteTaxonomyColumn);
+                siteTaxonomyColumnBind.SspId = store.Id;
+                siteTaxonomyColumnBind.TermSetId = set.Id;
+                siteTaxonomyColumnBind.Update();
                 context.ExecuteQuery();
-                Console.WriteLine($"Term Set unique ID: {set.Id} mapped to Site Column {siteTaxColumn.Title}");
+                Console.WriteLine($"Term Set unique ID: {set.Id} mapped to Site Column {siteTaxonomyColumn.Title}");
 
-                List list = web.Lists.GetByTitle("RFP");
-                context.Load(list);
+                List targetlist = web.Lists.GetByTitle("RFP");
+                context.Load(targetlist);
                 context.ExecuteQuery();
 
                 Field targetSiteColumn = web.AvailableFields.GetByInternalNameOrTitle(columnName);
                 context.Load(targetSiteColumn);
                 context.ExecuteQuery();
 
-                list.Fields.Add(targetSiteColumn);
-                list.Update();
+                targetlist.Fields.Add(targetSiteColumn);
+                targetlist.Update();
                 context.ExecuteQuery();
-                Console.WriteLine($"Site Column {targetSiteColumn.Title} added to list {list.Title}");
+                Console.WriteLine($"Site Column {targetSiteColumn.Title} added to list {targetlist.Title}");
             }
             else
             {
@@ -84,7 +84,7 @@ namespace SP_CSOM_DEMO2
         {
             try
             {
-                return ConfigurationManager.AppSettings["SPOAccount"];
+                return ConfigurationManager.AppSettings["SPOUsername"];
             }
             catch
             {
